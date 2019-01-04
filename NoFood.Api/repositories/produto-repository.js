@@ -2,7 +2,7 @@ require('../models/produto-model');
 const base = require('../bin/base/repository-base');
 
 class produtoRepository {
-    
+
     constructor() {
         this._base = new base('Produto');
     }

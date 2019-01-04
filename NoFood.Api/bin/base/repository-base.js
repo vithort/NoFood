@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 class repositoryBase {
-    
+
     constructor(model) {
         this._model = mongoose.model(model);
     }
@@ -15,7 +15,7 @@ class repositoryBase {
     }
 
     async update(id, data) {
-        await this._model.findByIdAndUpdate(id, {$set: data});
+        await this._model.findByIdAndUpdate(id, { $set: data });
         let resultado = await this._model.findById(id);
         return resultado;
     }
