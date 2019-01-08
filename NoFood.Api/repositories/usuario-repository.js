@@ -10,7 +10,7 @@ class usuarioRepository {
     }
 
     async isEmailExiste(Email) {
-        return await this._base._model.findOne({email: Email}, this._projection);
+        return await this._base._model.findOne({ email: Email }, this._projection);
     }
 
     async authenticate(Email, Senha) {
