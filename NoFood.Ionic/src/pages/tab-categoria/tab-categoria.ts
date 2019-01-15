@@ -18,7 +18,7 @@ export class TabCategoriaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TabCategoriaPage');
-    this.app.getRootNav().setRoot(CategoriaPage);
+    //this.app.getRootNav().setRoot(CategoriaPage);
   }
 
 }
