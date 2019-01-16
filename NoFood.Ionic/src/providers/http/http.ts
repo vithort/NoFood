@@ -1,8 +1,9 @@
+import { UsuarioProvider } from './../usuario/usuario';
 import { HttpResultModel } from '../../app/models/http-result-model';
 import { NetworkProvider } from './../network/network';
 import { AlertProvider } from './../alert/alert';
 import { SpinnerProvider } from './../spinner/spinner';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -17,11 +18,25 @@ export class HttpProvider {
     console.log('Hello HttpProvider Provider');
   }
 
+  public createHeader(header?: HttpHeaders): HttpHeaders {
+    if (!header) {
+      header = new HttpHeaders();
+    }
+    header = header.append('Content-Type', 'application/json');
+    header = header.append('Accept', 'application/json');
+    let token = UsuarioProvider.getTokenAccess;
+    if (token) {
+      header = header.append('x-access-token', token);
+    }
+    return header;
+  }
+
   public get(url: string): Promise<HttpResultModel> {
     this.spinnerSrv.show("Carregando os dados...");
+    let header = this.createHeader();
     return new Promise((resolve) => {
       if (this.networkSrv.isOnline) {
-        this.http.get(url)
+        this.http.get(url, { headers: header })
           .subscribe(_res => {
             this.spinnerSrv.hide();
             resolve({ success: true, data: _res, err: undefined });

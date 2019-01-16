@@ -30,6 +30,10 @@ export class UsuarioProvider extends ProviderBase<UsuarioModel>{
     localStorage.setItem(ConfigHelper.storageKeys.user, JSON.stringify(result.usuario));
   }
 
+  static get getTokenAccess(): string {
+    return localStorage.getItem(ConfigHelper.storageKeys.token);
+  }
+
   static get isLogado(): boolean {
     return localStorage.getItem(ConfigHelper.storageKeys.token) != undefined;
   }
