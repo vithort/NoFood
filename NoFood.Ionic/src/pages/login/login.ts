@@ -24,7 +24,15 @@ export class LoginPage {
 
   async login(): Promise<void> {
     let result = await this.usuarioSrv.authenticate(this.form.email, this.form.senha);
+    if (result.success) {
+      UsuarioProvider.registerLogin(result.data);
+      this.navCtrl.setRoot('CategoriaPage');
+    }
     console.log(result);
+  }
+
+  cadastrar(): void {
+    this.navCtrl.setRoot('CadastroPage');
   }
 
 }
