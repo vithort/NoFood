@@ -13,15 +13,15 @@ categoriaController.prototype.post = async (req, res) => {
     let _validationContract = new validation();
     _validationContract.isRequired(req.body.titulo, 'O Título é obrigatório!');
     _validationContract.isRequired(req.body.foto, 'A Foto é obrigatória!');
-    ctrlBase.post(_repo, _validationContract, req, rep);
+    ctrlBase.post(_repo, _validationContract, req, res);
 }
 
 categoriaController.prototype.put = async (req, res) => {
     let _validationContract = new validation();
     _validationContract.isRequired(req.body.titulo, 'O Título é obrigatório!');
     _validationContract.isRequired(req.body.foto, 'A Foto é obrigatória!');
-    _validationContract.isRequired(req.body.params.id, 'O Id que será atualizado é obrigatório!');
-    ctrlBase.put(_repo, _validationContract, req, rep);
+    _validationContract.isRequired(req.params.id, 'O Id que será atualizado é obrigatório!');
+    ctrlBase.put(_repo, _validationContract, req, res);
 }
 
 categoriaController.prototype.get = async (req, res) => {
