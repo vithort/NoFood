@@ -12,8 +12,8 @@ const usuarioRouter = require('../routes/usuario-router');
 const app = express();
 
 // Configuração de parse do JSON
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 
 // Configurando a conexão com o Banco de Dados
 // Parâmetros de Configuração: mongodb://<dbuser>:<dbpassword>@ds149034.mlab.com:49034/nofood

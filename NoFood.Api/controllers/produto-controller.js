@@ -11,30 +11,29 @@ function produtoController() {
 
 produtoController.prototype.post = async (req, res) => {
     let _validationContract = new validation();
-    _validationContract.isRequired(req.body.nome, 'O Nome é obrigatório!');
-    _validationContract.isRequired(req.body.preco, 'O Preço é obrigatória!');
-    _validationContract.isRequired(req.body.descricao, 'A Descrição é obrigatória!');
-    _validationContract.isRequired(req.body.foto, 'A Foto é obrigatória!');
-    _validationContract.isTrue(req.body.preco == 0, 'A Foto é obrigatória!');
+    _validationContract.isRequired(req.body.nome, 'O nome do produto é obrigatorio');
+    _validationContract.isRequired(req.body.descricao, 'A descrição do produto é obrigatoria');
+    _validationContract.isRequired(req.body.foto, 'A foto do produto é obrigatoria');
+    _validationContract.isRequired(req.body.preco, 'O preço do produto é obrigatorio');
+    _validationContract.isRequired(req.body.categoriaId, 'Informe a categoria que o produto está');
     if (req.body.preco) {
-        _validationContract.isTrue(req.body.preco == 0, 'O Preço do produto deve ser maior que 0!');
+        _validationContract.isTrue(req.body.preco == 0, 'O preço do produto deve ser maior que Zero.');
     }
-    ctrlBase.post(_repo, _validationContract, req, rep);
-}
+    ctrlBase.post(_repo, _validationContract, req, res);
+};
 
 produtoController.prototype.put = async (req, res) => {
     let _validationContract = new validation();
-    _validationContract.isRequired(req.body.nome, 'O Nome é obrigatório!');
-    _validationContract.isRequired(req.body.preco, 'O Preço é obrigatória!');
-    _validationContract.isRequired(req.body.descricao, 'A Descrição é obrigatória!');
-    _validationContract.isRequired(req.body.foto, 'A Foto é obrigatória!');
-    _validationContract.isTrue(req.body.preco == 0, 'A Foto é obrigatória!');
+    _validationContract.isRequired(req.body.nome, 'O nome do produto é obrigatorio');
+    _validationContract.isRequired(req.body.descricao, 'A descrição do produto é obrigatoria');
+    _validationContract.isRequired(req.body.foto, 'A foto do produto é obrigatoria');
+    _validationContract.isRequired(req.body.preco, 'O preço do produto é obrigatorio');
+    _validationContract.isRequired(req.body.categoriaId, 'Informe a categoria que o produto está');
     if (req.body.preco) {
-        _validationContract.isTrue(req.body.preco == 0, 'O Preço do produto deve ser maior que 0!');
+        _validationContract.isTrue(req.body.preco == 0, 'O preço do produto deve ser maior que Zero.');
     }
-    _validationContract.isRequired(req.body.params.id, 'O Id que será atualizado é obrigatório!');
-    ctrlBase.put(_repo, _validationContract, req, rep);
-}
+    ctrlBase.put(_repo, _validationContract, req, res);
+};
 
 produtoController.prototype.get = async (req, res) => {
     ctrlBase.get(_repo, req, res);

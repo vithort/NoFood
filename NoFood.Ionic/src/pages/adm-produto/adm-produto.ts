@@ -1,18 +1,21 @@
 import { AlertProvider } from './../../providers/alert/alert';
 import { CategoriaProvider } from './../../providers/categoria/categoria';
+import { CameraProvider } from './../../providers/camera/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
-import { CategoriaModel } from './../../app/models/categoria-model';
-import { CameraProvider } from './../../providers/camera/camera';
+import { ProdutoModel } from '../../app/models/produto-model';
+import { ProdutoProvider } from '../../providers/produto/produto';
+import { CategoriaModel } from '../../app/models/categoria-model';
 
 @IonicPage()
 @Component({
-  selector: 'page-adm-categoria',
-  templateUrl: 'adm-categoria.html',
+  selector: 'page-adm-produto',
+  templateUrl: 'adm-produto.html',
 })
-export class AdmCategoriaPage {
+export class AdmProdutoPage {
 
-  categoria: CategoriaModel;
+  produto: ProdutoModel;
+  categorias: Array<CategoriaModel> = new Array<CategoriaModel>();
 
   constructor(
     public navCtrl: NavController,
@@ -21,27 +24,40 @@ export class AdmCategoriaPage {
     public platform: Platform,
     private cameraSrv: CameraProvider,
     private categoriaSrv: CategoriaProvider,
+    private produtoSrv: ProdutoProvider,
     private alertSrv: AlertProvider
   ) {
-    let _categ = this.navParams.get('_categoria');
-    if (_categ) {
-      this.categoria = <CategoriaModel>_categ;
+    let _prod = this.navParams.get('_produto');
+    if (_prod) {
+      this.produto = <ProdutoModel>_prod;
     } else {
-      this.categoria = new CategoriaModel();
+      this.produto = new ProdutoModel();
     }
+    this.loadData();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdmCategoriaPage');
+    console.log('ionViewDidLoad AdmProdutoPage');
+  }
+
+  async loadData(): Promise<void> {
+    try {
+      let categoriasResult = await this.categoriaSrv.get();
+      if (categoriasResult.success) {
+        this.categorias = <Array<CategoriaModel>>categoriasResult.data;
+      }
+    } catch (error) {
+      console.log('Erro ao carregar as Categorias! Erro: ', error);
+    }
   }
 
   async excluir(): Promise<void> {
     try {
-      this.alertSrv.confirm('Excluir?', `Deseja realmente excluir a Categoria ${this.categoria.titulo}`, async () => {
-        let excluirResult = await this.categoriaSrv.delete(this.categoria._id);
+      this.alertSrv.confirm('Excluir?', `Deseja realmente excluir o Produto ${this.produto.nome}`, async () => {
+        let excluirResult = await this.produtoSrv.delete(this.produto._id);
         if (excluirResult.success) {
-          this.alertSrv.toast('Categoria excluída com sucesso!', 'bottom');
-          this.navCtrl.setRoot('AdmCategoriasPage');
+          this.alertSrv.toast('Produto excluído com sucesso!', 'bottom');
+          this.navCtrl.setRoot('AdmProdutosPage');
         }
       });
     } catch (error) {
@@ -51,16 +67,16 @@ export class AdmCategoriaPage {
 
   async salvar(): Promise<void> {
     let sucesso = false;
-    if (!this.categoria._id) {
-      let cadastroResult = await this.categoriaSrv.post(this.categoria);
+    if (!this.produto._id) {
+      let cadastroResult = await this.produtoSrv.post(this.produto);
       sucesso = cadastroResult.success;
     } else {
-      let updateResult = await this.categoriaSrv.put(this.categoria._id, this.categoria);
+      let updateResult = await this.produtoSrv.put(this.produto._id, this.produto);
       sucesso = updateResult.success;
     }
     if (sucesso) {
-      this.alertSrv.toast('Categoria salva com sucesso!', 'bottom');
-      this.navCtrl.setRoot('AdmCategoriasPage');
+      this.alertSrv.toast('Produto salvo com sucesso!', 'bottom');
+      this.navCtrl.setRoot('AdmProdutosPage');
     }
   }
 
@@ -71,7 +87,7 @@ export class AdmCategoriaPage {
         {
           text: 'Tirar Foto', handler: () => {
             this.cameraSrv.takePicture(photo => {
-              this.categoria.foto = photo;
+              this.produto.foto = photo;
             });
           },
           icon: this.platform.is('ios') ? null : 'camera'
@@ -80,7 +96,7 @@ export class AdmCategoriaPage {
           text: 'Pegar Galeria',
           handler: (() => {
             this.cameraSrv.getPictureFromGalery(photo => {
-              this.categoria.foto = photo;
+              this.produto.foto = photo;
             });
           }),
           icon: this.platform.is('ios') ? null : 'images'
