@@ -7,7 +7,7 @@ import { HttpProvider } from './../http/http';
 @Injectable()
 export class ProdutoProvider extends ProviderBase<ProdutoModel> {
 
-  url: string = `${ConfigHelper.Url}categoria`;
+  url: string = `${ConfigHelper.Url}produto`;
 
   constructor(
     public http: HttpProvider

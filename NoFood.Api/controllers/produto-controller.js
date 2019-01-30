@@ -1,8 +1,8 @@
 'use strict'
 
 const repository = require('../repositories/produto-repository');
-const validation = require('../bin/helpers/validation');
 const ctrlBase = require('../bin/base/controller-base');
+const validation = require('../bin/helpers/validation');
 const _repo = new repository();
 
 function produtoController() {

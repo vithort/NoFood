@@ -30,6 +30,8 @@ export class AdmProdutoPage {
     let _prod = this.navParams.get('_produto');
     if (_prod) {
       this.produto = <ProdutoModel>_prod;
+      this.produto.categoriaId = _prod.categoriaId._id;
+      console.log(this.produto.categoriaId);
     } else {
       this.produto = new ProdutoModel();
     }

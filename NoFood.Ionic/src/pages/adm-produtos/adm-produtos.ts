@@ -22,7 +22,7 @@ export class AdmProdutosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AdmProdutosPage hehehe');
+    console.log('ionViewDidLoad AdmProdutosPage');
   }
 
   private async _loadData(): Promise<void> {

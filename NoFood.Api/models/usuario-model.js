@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const usuarioModel = new schema({
-    nome: { trim: true, index: true, required: true, type: String },
+    nome: { type: String, required: true, trim: true, index: true },
     email: { type: String, required: true },
     senha: { type: String, required: true },
     foto: { type: String },

@@ -14,7 +14,10 @@
       Você não tem nenhum produto cadastrado.
     </ion-item>
     <ion-item *ngFor="let item of lista" text-wrap (click)="addOrEdit(item)">
-      {{ item.titulo }}
+      {{ item.nome }}
+      <ion-note item-end>
+        {{ item.categoriaId.titulo }}
+      </ion-note>
     </ion-item>
   </ion-list>
 </ion-content>
