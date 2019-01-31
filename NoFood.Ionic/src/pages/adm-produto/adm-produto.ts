@@ -1,11 +1,12 @@
-import { AlertProvider } from './../../providers/alert/alert';
-import { CategoriaProvider } from './../../providers/categoria/categoria';
-import { CameraProvider } from './../../providers/camera/camera';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform } from 'ionic-angular';
-import { ProdutoModel } from '../../app/models/produto-model';
+import { CameraProvider } from './../../providers/camera/camera';
+import { CategoriaProvider } from './../../providers/categoria/categoria';
 import { ProdutoProvider } from '../../providers/produto/produto';
+import { ProdutoModel } from '../../app/models/produto-model';
 import { CategoriaModel } from '../../app/models/categoria-model';
+import { AlertProvider } from './../../providers/alert/alert';
+
 
 @IonicPage()
 @Component({
@@ -28,7 +29,7 @@ export class AdmProdutoPage {
     private alertSrv: AlertProvider
   ) {
     let _prod = this.navParams.get('_produto');
-    if (_prod) {
+    if (_prod && _prod._id) {
       this.produto = <ProdutoModel>_prod;
       this.produto.categoriaId = _prod.categoriaId._id;
       console.log(this.produto.categoriaId);

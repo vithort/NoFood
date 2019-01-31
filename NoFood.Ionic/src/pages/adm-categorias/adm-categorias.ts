@@ -1,7 +1,7 @@
-import { CategoriaProvider } from './../../providers/categoria/categoria';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoriaModel } from '../../app/models/categoria-model';
+import { CategoriaProvider } from './../../providers/categoria/categoria';
 
 @IonicPage()
 @Component({

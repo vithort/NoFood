@@ -16,7 +16,6 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 
 // Configurando a conexão com o Banco de Dados
-// Parâmetros de Configuração: mongodb://<dbuser>:<dbpassword>@ds149034.mlab.com:49034/nofood
 mongoose.connect(variables.Database.connection, { useNewUrlParser: true });
 
 // Configurando as rotas

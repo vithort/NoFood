@@ -3,7 +3,7 @@
     <ion-title>Produto</ion-title>
     <ion-buttons right>
       <button ion-button clear (click)="salvar()">
-        <ion-icon name="checkmark-circle"></ion-icon> Salvar
+        Salvar
       </button>
       <button *ngIf="produto._id" ion-button icon-only (click)="excluir()">
         <ion-icon name="trash"></ion-icon>
@@ -14,7 +14,7 @@
 <ion-content no-padding>
   <ion-list no-lines>
     <ion-item>
-      <ion-label floating>Nome</ion-label>
+      <ion-label floating>Título</ion-label>
       <ion-input [(ngModel)]="produto.nome" type="text"></ion-input>
     </ion-item>
     <ion-item>
@@ -33,7 +33,8 @@
     </ion-item>
     <ion-item text-center>
       <button ion-button clear (click)="getPictureOption()">
-        <ion-icon name="camera" item-left></ion-icon>Selecionar Foto
+        <ion-icon name="camera" item-left></ion-icon>
+        Selecionar Foto
       </button>
     </ion-item>
     <ion-item *ngIf="produto.foto">

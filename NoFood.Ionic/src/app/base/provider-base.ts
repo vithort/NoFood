@@ -1,5 +1,6 @@
 import { HttpProvider } from './../../providers/http/http';
 import { HttpResultModel } from '../models/http-result-model';
+
 export abstract class ProviderBase<T> {
 
     constructor(
